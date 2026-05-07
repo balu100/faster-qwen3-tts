@@ -1,0 +1,15 @@
+services:
+  qwen3-tts:
+    build: .
+    container_name: qwen3-tts
+    gpus: all
+
+    ports:
+      - "127.0.0.1:8880:8880"
+
+    volumes:
+      - ./voices.json:/voices/voices.json:ro
+      - ./reference_audio:/reference_audio:ro
+      - ./hf-cache:/cache/huggingface
+
+    restart: unless-stopped

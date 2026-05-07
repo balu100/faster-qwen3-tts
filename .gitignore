@@ -6,3 +6,5 @@ sample_*.wav
 __pycache__/
 *.pyc
 .venv/
+build_voices_json.ps1
+hf-cache/

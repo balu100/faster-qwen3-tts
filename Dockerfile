@@ -11,15 +11,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN git clone https://github.com/andimarafioti/faster-qwen3-tts.git /app/faster-qwen3-tts
 
 WORKDIR /app/faster-qwen3-tts
+COPY examples/renpy_openai_server.py /app/faster-qwen3-tts/examples/renpy_openai_server.py
 
 RUN pip install --break-system-packages --upgrade pip && \
     pip install --break-system-packages -e ".[demo]" pydub
 
 EXPOSE 8880
 
-CMD ["python", "examples/openai_server.py", \
+CMD ["python", "examples/renpy_openai_server.py", \
      "--model", "Qwen/Qwen3-TTS-12Hz-1.7B-Base", \
      "--voices", "/voices/voices.json", \
      "--host", "0.0.0.0", \
      "--port", "8880", \
-     "--device", "cuda"]
+     "--device", "cuda", \
+     "--chunk-size", "6"]
